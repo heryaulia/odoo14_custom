@@ -1,18 +1,10 @@
-# -*- coding: utf-8 -*-
+from odoo import models, api
 
-# from odoo import models, fields, api
+class AccountMove(models.Model):
+    _inherit = 'account.move'
+    _description = 'Inherit Account Move'
 
-
-# class invoice_api(models.Model):
-#     _name = 'invoice_api.invoice_api'
-#     _description = 'invoice_api.invoice_api'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
+    @api.model
+    def create_and_post_invoice(self, invoice_vals):
+        invoice = self.create(invoice_vals)
+        invoice.action_post()
