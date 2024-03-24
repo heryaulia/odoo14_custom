@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="email_template_import_complete" model="mail.template">
+            <field name="name">Employee Import Complete</field>
+            <field name="email_to">${object.env.user.email|safe}</field>
+            <field name="subject">Employee Import Notification</field>
+            <field name="model_id" ref="model_employee_import"/>
+            <field name="body_html"><![CDATA[
+                <p>Hello,</p>
+                <p>The employee import process you started is now complete.</p>
+                <p>Status: ${object.import_status}</p>
+            ]]></field>
+        </record>
+    </data>
+</odoo>
